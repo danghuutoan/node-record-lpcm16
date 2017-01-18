@@ -18,7 +18,6 @@ This module requires you to install [SoX](http://sox.sourceforge.net) and it mus
 
 ### For Mac OS
 `brew install sox`
-
 ### For most linux disto's
 `sudo apt-get install sox libsox-fmt-all`
 
@@ -33,6 +32,7 @@ threshold     : 0.5    // silence threshold (rec only)
 verbose       : false  // log info to the console
 recordProgram : 'rec'  // Defaults to 'rec' - also supports 'arecord' and 'sox'
 device        : null   // recording device (e.g.: 'plughw:1')
+adioType      : 'wav'  // Defaults to 'wav' - you can choose any audio type that the record program support
 ```
 
 > Please note that `arecord` might not work on all operating systems. If you can't capture any sound with `arecord`, try to change device (`arecord -l`). 
@@ -47,7 +47,8 @@ var file = fs.createWriteStream('test.wav', { encoding: 'binary' })
 
 record.start({
   sampleRate : 44100,
-  verbose : true
+  verbose : true,
+  audioType: 'wav'
 })
 .pipe(file)
 ```

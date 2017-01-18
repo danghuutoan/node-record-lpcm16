@@ -13,7 +13,8 @@ exports.start = function (options) {
     compress: false,
     threshold: 0.5,
     verbose: false,
-    recordProgram: 'rec'
+    recordProgram: 'rec',
+    audioType: 'wav'
   }
 
   options = Object.assign(defaults, options)
@@ -33,7 +34,7 @@ exports.start = function (options) {
         '-c', '1',                // channels
         '-e', 'signed-integer',   // sample encoding
         '-b', '16',               // precision (bits)
-        '-t', 'wav',              // audio type
+        '-t', options.audioType,       // audio type
         '-',                      // pipe
             // end on silence
         'silence', '1', '0.1', options.threshold + '%',
@@ -47,7 +48,7 @@ exports.start = function (options) {
         '-q',                     // show no progress
         '-r', options.sampleRate, // sample rate
         '-c', '1',                // channels
-        '-t', 'wav',              // audio type
+        '-t', options.audioType,  // audio type
         '-f', 'S16_LE',           // Sample format
         '-'                       // pipe
       ]
